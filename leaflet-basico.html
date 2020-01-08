@@ -20,7 +20,7 @@
             height: 100%;
             width: 100%;
         }
-    </style>    
+    </style>
     <script>
         var map, capa1;
         function init() {
@@ -34,7 +34,18 @@
                     minZoom: 1,
                     attribution: "OSM"
                 });
-            capa1.addTo(map);
+            capa1.addTo(map); //afegeio al mapa un punt
+
+            L.marker([41.3954, 2.16859]).addTo(map).bindPopup('Hola punto').openPopup(); //el punt te hola pto
+
+            map.on('click', function (e) {      // activo event em diu coords on clicko amb el mouse
+                new L.circleMarker(e.latlng, {
+                    color: '#ffffff',
+                    fillColor: '#00ff00',
+                    fillOpacity: 0.9,
+                    radius: 8
+                }).addTo(map).bindPopup(e.latlng.lat + "," + e.latlng.lng).openPopup();
+            });
         }
     </script>
 </head>
