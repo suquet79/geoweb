@@ -1,0 +1,74 @@
+<html lang="es">
+    <head>
+        <title>Ejemplo 1 Leaflet-controles</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="author" content="autor" />
+        <meta name="description" content="descripción página" />
+        <meta name="robots" content="index,follow" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+            }
+    
+            #map {  /*mapa ocupe 100% DE ÑLA PAGINA*/
+                height: 100%;
+                width: 100%;
+            }
+        </style>
+    
+        <script>
+            var map, osm, esri, terreno;
+            var controlCapas;
+            var controlEscala;
+    
+            function init() {
+                map = L.map('map').setView([41.6863, 1.8382], 8); /*declaro l'objecte map, amb aqestes coord i zoom*/
+    
+                esri = L.tileLayer(  /*capa tilelayer   */
+                    'http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+                    maxZoom: 17,  /*parametres qe li passo */
+                    minZoom: 1,
+                    attribution: 'Tiles © Esri',
+                }).addTo(map);   /*l'sgrego directament*/
+    
+                osm = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 19,
+                    minZoom: 1,
+                    attribution: 'OSM'
+                });  /*com no faig addtopmap no es veu al mapa, esta carregada pro oculta*/
+    
+                terreno =
+                    L.tileLayer('http://{s}.tile.stamen.com/terrain-background/{z}/{x}/{y}.png', {
+                        maxZoom: 19,
+                        attribution: 'Stamen terrain',
+                        opacity: 0.5   /*la fai semiopaca*/
+                    }); /*com no faig addtopmap no es veu al mapa, esta carregada pro oculta*/
+    
+                var baseMaps = { /*declaro aqest objecte*/
+                    "Orto_esri": esri,
+                    "Mapa_osm": osm
+                };
+                var overlayMaps = { /*declaro aqest objecte*/
+                    "Terrain": terreno
+                };
+    
+                controlCapas = L.control.layers(baseMaps, overlayMaps, {collapsed:false});
+                controlCapas.addTo(map);
+    
+                controlEscala = L.control.scale();
+                controlEscala.addTo(map);
+            }
+        </script>
+    </head>
+    
+    <body onLoad="init()">
+        <div id="map">
+        </div>
+    </body>
+    
+    </html>
