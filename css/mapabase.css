@@ -20,3 +20,25 @@ body {
         font-size: 21px;    
         
 }
+
+.panelTopIzquierda {
+    position: absolute;
+    top: 45px;
+    left: 20px;
+    width: 200px;
+    z-index: 1000;
+    background-color: rgba(255,255,255,0.9);
+    padding: 10px;
+    font-size:20px;
+    color: #333333;
+    border-radius: 5px;
+}
+
+.panelTopIzquierda label{
+    font-size:0.85em;
+}
+
+.panelTopIzquierda input{
+    cursor:pointer;
+    /*width: 95%;   fora pel edificis.html*/
+}

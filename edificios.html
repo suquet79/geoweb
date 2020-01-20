@@ -1,0 +1,56 @@
+<html>
+    <head>
+    <meta charset='utf-8' />
+    <title>Edificios</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.6.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.6.1/mapbox-gl.css' rel='stylesheet' />
+    <link href='css/mapabase.css' rel='stylesheet' />  
+    <script src='js/utils.js'></script>
+    <script src='js/edificios.js'></script>
+    <script>
+        //Añadir vuestor token y/o estilo !!
+        var map;
+        function init() {
+            mapboxgl.accessToken =
+                'pk.eyJ1Ijoic3VxdWV0NzkiLCJhIjoiY2s0OHRicWN6MTVkcTNsbGY0MmI2NXRwOSJ9.Vhk9cAQbRBmhaYrlfG5ABQ';
+             map = new mapboxgl.Map({
+                container: 'map',
+                style: 'mapbox://styles/mapbox/dark-v10',  /*aqui podeem copiar un estil del icc*/
+                center: [41.41223,2.014851],
+                zoom: 13,
+                attributionControl: false,
+                pitch: 45,
+                hash: true
+            });
+ 
+            map.addControl(new mapboxgl.AttributionControl({ compact: true }));
+            map.addControl(new mapboxgl.NavigationControl());
+
+            map.on('load', function () {
+                addEdificiosCapa();
+                addPopupToMapEdificios("edificios");  //amb aqesta funcio redueixo el text en clikar un edifici
+                //addPopupToMap("edificios");  // amb aqesta funcio tot lo tetxt
+                }); //fin onload
+ 
+        } // final init
+    </script>
+    </head>
+ 
+    <body onload="init()">
+        <div class="titulo">Edificios Molins</div>
+        <div class="panelTopIzquierda">
+            <h5>Altura edificios</h5>
+
+            <input OnChange="activarEdificios(this.checked)"   type="checkbox" checked> edificis
+            
+
+            <label id="altura">Altura superior a 0 m</label>
+            <input  onChange="filtrarEdificios(this.value)" id="slider" type="range" min="1" max="110" step="5" value="0" />
+        </div>                    	<!-- peraqe el slider filtre els edificis (elimini) segons nº plantes, es mou de 5 en 5 (step) -->
+ 
+        <div id="map"></div>
+    </body>
+ 
+    </html>
+ 
