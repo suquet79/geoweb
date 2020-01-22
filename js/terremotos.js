@@ -1,6 +1,6 @@
 function generarPeticionTerremotos() {
 
-    var peticion = 'https://api.geonames.org/earthquakesJSON?' +
+    var peticion = 'https://secure.geonames.org/earthquakesJSON?' +
         'north=' + map.getBounds()._ne.lat + '&' +
         'south=' + map.getBounds()._sw.lat + '&' +
         'east=' + map.getBounds()._ne.lng + '&' +
@@ -71,6 +71,7 @@ function generarPeticionTerremotos() {
     });
 
 } // fin funcion
+
 
 function terremotosGeonamesToGeoJSON(respuestaGeonames){
 

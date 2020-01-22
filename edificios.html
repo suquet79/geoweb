@@ -5,6 +5,8 @@
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.6.1/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.6.1/mapbox-gl.css' rel='stylesheet' />
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.min.js"></script>
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.css" type="text/css"/>
     <link href='css/mapabase.css' rel='stylesheet' />  
     <script src='js/utils.js'></script>
     <script src='js/edificios.js'></script>
@@ -16,7 +18,8 @@
                 'pk.eyJ1Ijoic3VxdWV0NzkiLCJhIjoiY2s0OHRicWN6MTVkcTNsbGY0MmI2NXRwOSJ9.Vhk9cAQbRBmhaYrlfG5ABQ';
              map = new mapboxgl.Map({
                 container: 'map',
-                style: 'mapbox://styles/mapbox/dark-v10',  /*aqui podeem copiar un estil del icc*/
+                //aqui podeem copiar un estil del icc !!
+                style: 'mapbox://styles/mapbox/dark-v10',  
                 center: [41.41223,2.014851],
                 zoom: 13,
                 attributionControl: false,
@@ -26,6 +29,12 @@
  
             map.addControl(new mapboxgl.AttributionControl({ compact: true }));
             map.addControl(new mapboxgl.NavigationControl());
+
+            map.addControl(
+                new MapboxGeocoder({
+                accessToken: mapboxgl.accessToken,
+                mapboxgl: mapboxgl
+                }));
 
             map.on('load', function () {
                 addEdificiosCapa();

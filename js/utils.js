@@ -25,6 +25,7 @@ function addPopupToMap(nombreCapa) {
 
 }
 
+
 async function enviarPeticion(url) {
 
   return fetch(url)
@@ -41,5 +42,3 @@ async function enviarPeticion(url) {
       });
 
 }
-  
-  
